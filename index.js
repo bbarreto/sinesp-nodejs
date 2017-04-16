@@ -21,48 +21,47 @@ module.exports = {
     var data = new Date().toISOString().replace("T", " ").substr(0, 19);
 
     /** Cria o XML de chamada do serviço SOAP */
-    var xml = '<?xml version="1.0" encoding="utf-8" standalone="yes" ?>\
-          <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">\
-            <soap:Header>\
-              <b>samsung GT-I9192</b>\
-              <c>ANDROID</c>\
-              <i>-38.5284057</i>\
-              <d>4.4.2</d>\
-              <e>SinespCidadao</e>\
-              <f>10.0.0.1</f>\
-              <g>'+token+'</g>\
-              <k>'+uuidV4()+'</k>\
-              <h>-3.7583078</h>\
-              <l>'+data+'</l>\
-              <m>8797e74f0d6eb7b1ff3dc114d4aa12d3</m>\
-            </soap:Header>\
-            <soap:Body>\
-              <webs:getStatus xmlns:webs="http://soap.ws.placa.service.sinesp.serpro.gov.br/">\
-                <a>'+placa+'</a>\
-              </webs:getStatus>\
-            </soap:Body>\
-          </soap:Envelope>';
+    var xml = '<?xml version=\'1.0\' encoding=\'UTF-8\'?>\
+      <v:Envelope xmlns:i="http://www.w3.org/2001/XMLSchema-instance"\
+      xmlns:d="http://www.w3.org/2001/XMLSchema" xmlns:c="http://schemas.xmlsoap.org/soap/encoding/"\
+      xmlns:v="http://schemas.xmlsoap.org/soap/envelope/">\
+        <v:Header>\
+          <b>motorola XT1635-02</b>\
+          <c>ANDROID</c>\
+          <d>7.0</d>\
+          <e>4.1.5</e>\
+          <f>192.168.0.100</f>\
+          <g>'+token+'</g>\
+          <h>0.0</h>\
+          <i>0.0</i>\
+          <k/>\
+          <l>'+data+'</l>\
+          <m>8797e74f0d6eb7b1ff3dc114d4aa12d3</m>\
+        </v:Header>\
+        <v:Body>\
+          <n0:getStatus xmlns:n0="http://soap.ws.placa.service.sinesp.serpro.gov.br/">\
+            <a>'+placa+'</a>\
+          </n0:getStatus>\
+        </v:Body>\
+      </v:Envelope>';
 
-    xml = xml.replace(/[\t\n]/gi, '');
-
-    /** Montagem dos cabeçalhos da requisição */
-    var headers = {
-      "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-      "Accept": "text/plain, */*; q=0.01",
-      "Cache-Control": "no-cache",
-      "Pragma": "no-cache",
-      "Host": "sinespcidadao.sinesp.gov.br",
-      "Content-length": xml.length,
-      "User-Agent": "SinespCidadao / 3.0.2.1 CFNetwork / 758.2.8 Darwin / 15.0.0",
-      "Connection": "close"
-    };
+      /** Montagem dos cabeçalhos da requisição */
+      var headers = {
+        "User-Agent": "ksoap2-android/2.6.0+",
+        "SOAPAction": "",
+        "Content-type": "text/xml;charset=UTF-8",
+        "Accept-Encoding": "gzip",
+        "Content-length": xml.length,
+        "Host": "sinespcidadao.sinesp.gov.br",
+        "Connection": "Keep-Alive"
+      };
 
     /** Tenta realizar a requisição */
     try {
 
       requests.post({
           headers: headers,
-          url: 'http://sinespcidadao.sinesp.gov.br/sinesp-cidadao/mobile/consultar-placa',
+          url: 'https://sinespcidadao.sinesp.gov.br/sinesp-cidadao/mobile/consultar-placa',
           body: xml
         }, function(error, response, body){
 
