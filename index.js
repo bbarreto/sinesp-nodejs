@@ -62,7 +62,8 @@ module.exports = {
       requests.post({
           headers: headers,
           url: 'https://sinespcidadao.sinesp.gov.br/sinesp-cidadao/mobile/consultar-placa',
-          body: xml
+          body: xml,
+          strictSSL: false
         }, function(error, response, body){
 
           if (error===null) {
