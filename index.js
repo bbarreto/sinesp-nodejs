@@ -63,7 +63,8 @@ module.exports = {
           headers: headers,
           url: 'https://sinespcidadao.sinesp.gov.br/sinesp-cidadao/mobile/consultar-placa',
           body: xml,
-          strictSSL: false
+          strictSSL: false,
+          rejectUnauthorized: false
         }, function(error, response, body){
 
           if (error===null) {
