@@ -12,7 +12,7 @@ module.exports = {
     }
 
     /** Chave secreta para criptografia */
-    var secret = 'TRwf1iBwvCoSboSscGne';
+    var secret = 'XvAmRTGhQchFwzwduKYK';
 
     /** Criptografa a placa usando a chave do aplicativo */
     var token = crypto.createHmac('sha1', placa+secret).update(placa).digest('hex');
@@ -61,7 +61,7 @@ module.exports = {
 
       requests.post({
           headers: headers,
-          url: 'https://sinespcidadao.sinesp.gov.br/sinesp-cidadao/mobile/consultar-placa',
+          url: 'https://sinespcidadao.sinesp.gov.br/sinesp-cidadao/mobile/consultar-placa/v2',
           body: xml,
           strictSSL: false,
           rejectUnauthorized: false
