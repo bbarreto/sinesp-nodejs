@@ -1,4 +1,4 @@
-# sinesp-nodejs [![npm version](https://badge.fury.io/js/sinesp-nodejs.svg)](https://badge.fury.io/js/sinesp-nodejs) [![Build Status](https://travis-ci.org/wgenial/sinesp-nodejs.svg?branch=master)](https://travis-ci.org/wgenial/sinesp-nodejs)
+# sinesp-nodejs [![npm version](https://badge.fury.io/js/sinesp-nodejs.svg)](https://badge.fury.io/js/sinesp-nodejs) [![Build Status](https://travis-ci.org/bbarreto/sinesp-nodejs.svg?branch=master)](https://travis-ci.org/bbarreto/sinesp-nodejs)
 Consulte qualquer placa de veículo brasileiro na base de dados do SINESP a partir de sua aplicação desenvolvida em node.js.
 
 Para instalar o pacote, utilize npm:
