@@ -1,7 +1,6 @@
 var crypto = require('crypto');
 var requests = require('request');
 var parseXML = require('xml2js').parseString;
-const uuidV4 = require('uuid/v4');
 
 module.exports = {
   consultaPlaca: function (placa, callback) {
