@@ -11,7 +11,7 @@ module.exports = {
     }
 
     /** Chave secreta para criptografia */
-    var secret = 'XvAmRTGhQchFwzwduKYK';
+    var secret = 'Mw6HqdLgQsX41xAGZgsF';
 
     /** Criptografa a placa usando a chave do aplicativo */
     var token = crypto.createHmac('sha1', placa+secret).update(placa).digest('hex');
