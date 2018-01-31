@@ -52,7 +52,7 @@ Se houver um erro de comunicação com o SINESP, será retornado um objeto com o
 ```
 
 ## Atenção
-Este projeto não possui nenhum vínculo oficial com o Sistema Nacional de Informações de Segurança Pública (SINESP). O software é disponibilizado da forma como está aqui e não há garantias que ele irá funcionar sempre. Como a API do SINESP não é publicamente documentada, esta biblioteca pode parar de funcioanar a qualquer momento sem aviso prévio.
+Este projeto não possui nenhum vínculo oficial com o Sistema Nacional de Informações de Segurança Pública (SINESP). O software é disponibilizado da forma como está aqui e não há garantias que ele irá funcionar sempre. Como a API do SINESP não é publicamente documentada, esta biblioteca pode parar de funcionar a qualquer momento sem aviso prévio.
 
 Sinta-se livre para fazer um fork e enviar um pull request com melhorias ou uma nova implementação, caso tudo pare de funcionar e você saiba como recuperar.
 
