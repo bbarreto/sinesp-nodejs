@@ -11,7 +11,7 @@ module.exports = {
     }
 
     /** Chave secreta para criptografia */
-    var secret = 'Mw6HqdLgQsX41xAGZgsF';
+    var secret = '#8.1.0#Mw6HqdLgQsX41xAGZgsF';
 
     /** Criptografa a placa usando a chave do aplicativo */
     var token = crypto.createHmac('sha1', placa+secret).update(placa).digest('hex');
@@ -27,7 +27,7 @@ module.exports = {
         <v:Header>\
           <b>motorola XT1635-02</b>\
           <c>ANDROID</c>\
-          <d>7.0</d>\
+          <d>8.1.0</d>\
           <e>4.1.5</e>\
           <f>192.168.0.100</f>\
           <g>'+token+'</g>\
@@ -60,7 +60,7 @@ module.exports = {
 
       requests.post({
           headers: headers,
-          url: 'https://sinespcidadao.sinesp.gov.br/sinesp-cidadao/mobile/consultar-placa/v2',
+          url: 'https://cidadao.sinesp.gov.br/sinesp-cidadao/mobile/consultar-placa/v3',
           body: xml,
           strictSSL: false,
           rejectUnauthorized: false
