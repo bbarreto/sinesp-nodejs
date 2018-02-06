@@ -1,6 +1,6 @@
 {
   "name": "sinesp-nodejs",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "API para a consulta de placas de veículos na base de dados do SINESP.",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/bbarreto/sinesp-nodejs.git"
   },
   "dependencies": {
-    "request": "^2.82.0",
+    "request": "^2.83.0",
     "xml2js": "^0.4.19"
   },
   "keywords": [
