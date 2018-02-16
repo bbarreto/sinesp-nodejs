@@ -74,7 +74,7 @@ module.exports = {
             }, function (err, result) {
               resultado = result['soap:Envelope']['soap:Body']['ns2:getStatusResponse']['return'];
             });
-            callback(resultado);
+            callback(null, resultado);
 
           } else {
             callback({ error: error });
