@@ -8,12 +8,14 @@ npm install sinesp-nodejs
 
 Após a instalação, utilize em sua aplicação:
 ```javascript
-sinesp = require('sinesp-nodejs');
+sinesp = require('sinesp-nodejs')
 
 /* Realizar uma consulta contra a placa AAA-0001 */
-sinesp.consultaPlaca('AAA0001', function (retorno) {
-	console.log(retorno);
-});
+sinesp.consultaPlaca('AAA0001').then(dados => {
+  console.log(dados);
+}).catch(err => {
+  console.log(err);
+})
 ```
 
 O retorno da função é um objeto com os seguintes dados:
@@ -33,21 +35,6 @@ O retorno da função é um objeto com os seguintes dados:
   "uf": "PR",
   "municipio": "CURITIBA",
   "chassi": "************49500"
-}
-```
-
-Sempre que a variável `codigoRetorno` for diferente de 0 (zero), é que houve um erro de pesquisa. Exemplo:
-```json
-{
-  "codigoRetorno": "1",
-  "mensagemRetorno": "Não foi possível estabelecer comunicação entre Sinesp Cidadão e RENAVAM."
-}
-```
-
-Se houver um erro de comunicação com o SINESP, será retornado um objeto com o item `error`. Exemplo:
-```json
-{
-  "error": "<mensagem de erro>"
 }
 ```
 

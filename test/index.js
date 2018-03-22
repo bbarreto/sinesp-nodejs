@@ -1,12 +1,21 @@
-var should = require('chai').should(),
+const chai = require('chai'),
+    chaiAsPromised = require("chai-as-promised"),
     sinesp = require('../index'),
-    consultaPlaca = sinesp.consultaPlaca;
+    placaTeste = 'AAA0001'
 
+chai.use(chaiAsPromised)
+const should = chai.should()
+const expect = chai.expect
+const assert = chai.assert
 
 describe('#consultaPlaca', function() {
-  it('consulta a placa AAA0001', function() {
-    consultaPlaca('AAA0001', function (retorno) {
-    	retorno.should.be.an('object');
-    });
-  });
-});
+
+  it('consulta a placa '+placaTeste, function() {
+    this.timeout(25000)
+    return assert.isFulfilled(sinesp.consultaPlaca(placaTeste))
+  })
+
+  it('placa nao informada', () => {
+     return expect(sinesp.consultaPlaca(null)).to.be.rejectedWith('Informe o parâmetro placa.')
+  })
+})

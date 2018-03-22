@@ -1,26 +1,27 @@
-var crypto = require('crypto');
-var requests = require('request');
-var parseXML = require('xml2js').parseString;
+const crypto = require('crypto'),
+      fetch = require('node-fetch'),
+      parseXML = require('xml2js').parseString,
+      HttpsProxyAgent = require('https-proxy-agent')
 
 module.exports = {
   consultaPlaca: function (placa, callback) {
 
     /** Verifica se a placa foi informada */
     if (!placa) {
-      callback({ error: 'Informe o parâmetro placa.' });
+      return Promise.reject('Informe o parâmetro placa.');
     }
 
     /** Chave secreta para criptografia */
-    var secret = '#8.1.0#Mw6HqdLgQsX41xAGZgsF';
+    const secret = '#8.1.0#Mw6HqdLgQsX41xAGZgsF';
 
     /** Criptografa a placa usando a chave do aplicativo */
-    var token = crypto.createHmac('sha1', placa+secret).update(placa).digest('hex');
+    const token = crypto.createHmac('sha1', placa+secret).update(placa).digest('hex');
 
     /** Gerar a data da requisição */
-    var data = new Date().toISOString().replace("T", " ").substr(0, 19);
+    const data = new Date().toISOString().replace("T", " ").substr(0, 19);
 
     /** Cria o XML de chamada do serviço SOAP */
-    var xml = '<?xml version=\'1.0\' encoding=\'UTF-8\'?>\
+    const xml = '<?xml version=\'1.0\' encoding=\'UTF-8\'?>\
       <v:Envelope xmlns:i="http://www.w3.org/2001/XMLSchema-instance"\
       xmlns:d="http://www.w3.org/2001/XMLSchema" xmlns:c="http://schemas.xmlsoap.org/soap/encoding/"\
       xmlns:v="http://schemas.xmlsoap.org/soap/envelope/">\
@@ -45,48 +46,47 @@ module.exports = {
       </v:Envelope>';
 
       /** Montagem dos cabeçalhos da requisição */
-      var headers = {
+      const headers = {
         "User-Agent": "ksoap2-android/2.6.0+",
         "SOAPAction": "",
         "Content-type": "text/xml;charset=UTF-8",
         "Accept-Encoding": "gzip",
         "Content-length": xml.length,
-        "Host": "sinespcidadao.sinesp.gov.br",
         "Connection": "Keep-Alive"
-      };
+      }
 
-    /** Tenta realizar a requisição */
-    try {
+      /**
+       ** Utilizar proxy caso haja configuração
+       ** - O proxy é necessário se o código estiver rodando em um
+       **   servidor fora do Brasil
+       */
+      const proxy = process.env.HTTP_PROXY ? new HttpsProxyAgent(process.env.HTTP_PROXY) : null
 
-      requests.post({
-          headers: headers,
-          url: 'https://cidadao.sinesp.gov.br/sinesp-cidadao/mobile/consultar-placa/v3',
-          body: xml,
-          strictSSL: false,
-          rejectUnauthorized: false
-        }, function(error, response, body){
+      return fetch('https://cidadao.sinesp.gov.br/sinesp-cidadao/mobile/consultar-placa/v3', {
+        method: 'POST',
+        body: xml,
+        headers: headers,
+        agent: proxy
+      }).then(function(response) {
 
-          if (error===null) {
-
-            /** Faz o parse do XML recebido */
-            parseXML(body, {
+        if (response.status === 200) {
+          return response.text().then(text => {
+            parseXML(text, {
               explicitArray: false
             }, function (err, result) {
               resultado = result['soap:Envelope']['soap:Body']['ns2:getStatusResponse']['return'];
-            });
-            callback(resultado);
-
-          } else {
-            callback({ error: error });
-          }
-          
+            })
+            /** Verifica se o resultado não contém erros para retornar corretamente */
+            if (resultado.codigoRetorno!=='0') return Promise.reject(resultado)
+            return resultado
+          })
+        } else {
+          return response.text().then(text => {
+            return Promise.reject(text)
+          });
         }
-      );
+      })
 
-    } catch (err) {
-      callback({ error: err });
-    }
- 
   }
 
 };
