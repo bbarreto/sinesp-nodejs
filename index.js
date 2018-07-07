@@ -12,7 +12,7 @@ module.exports = {
     }
 
     /** Chave secreta para criptografia */
-    const secret = '#8.1.0#Mw6HqdLgQsX41xAGZgsF';
+    const secret = '#8.1.0#g8LzUadkEHs7mbRqbX5l';
 
     /** Criptografa a placa usando a chave do aplicativo */
     const token = crypto.createHmac('sha1', placa+secret).update(placa).digest('hex');
@@ -62,7 +62,7 @@ module.exports = {
        */
       const proxy = process.env.HTTP_PROXY ? new HttpsProxyAgent(process.env.HTTP_PROXY) : null
 
-      return fetch('https://cidadao.sinesp.gov.br/sinesp-cidadao/mobile/consultar-placa/v3', {
+      return fetch('https://cidadao.sinesp.gov.br/sinesp-cidadao/mobile/consultar-placa/v4', {
         method: 'POST',
         body: xml,
         headers: headers,
