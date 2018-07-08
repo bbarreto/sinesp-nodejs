@@ -21,20 +21,23 @@ sinesp.consultaPlaca('AAA0001').then(dados => {
 O retorno da função é um objeto com os seguintes dados:
 ```json
 {
-  "codigoRetorno": "0",
-  "mensagemRetorno": "Sem erros.",
-  "codigoSituacao": "0",
-  "situacao": "Sem restrição",
-  "modelo": "FORD/ESCORT 1.8 XR3",
-  "marca": "FORD/ESCORT 1.8 XR3",
-  "cor": "CINZA",
-  "ano": "1990",
-  "anoModelo": "1990",
-  "placa": "AAA0001",
-  "data": "10/12/2016 às 14:49:22",
-  "uf": "PR",
-  "municipio": "CURITIBA",
-  "chassi": "************49500"
+	"codigoRetorno": "0",
+	"mensagemRetorno": "Sem erros.",
+	"codigoSituacao": "0",
+	"situacao": "Sem restrição",
+	"modelo": "FORD/ESCORT 1.8 XR3",
+	"marca": "FORD/ESCORT 1.8 XR3",
+	"cor": "Cinza",
+	"ano": "1990",
+	"anoModelo": "1990",
+	"placa": "AAA0001",
+	"data": "07/07/2018 às 14:12:48",
+	"uf": "PR",
+	"municipio": "CURITIBA",
+	"chassi": "49500",
+	"dataAtualizacaoCaracteristicasVeiculo": "13/04/2018",
+	"dataAtualizacaoRouboFurto": "06/07/2018",
+	"dataAtualizacaoAlarme": "06/07/2018"
 }
 ```
 
