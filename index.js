@@ -78,11 +78,17 @@ module.exports = {
             })
             /** Verifica se o resultado não contém erros para retornar corretamente */
             if (resultado.codigoRetorno!=='0') return Promise.reject(resultado)
+			if(callback){
+				callback(resultado)
+			}
             return resultado
           })
         } else {
           return response.text().then(text => {
-            return Promise.reject(text)
+			if(callback){
+				callback(resultado)
+            }
+			return Promise.reject(text)
           });
         }
       })
