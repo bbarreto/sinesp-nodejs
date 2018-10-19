@@ -1,6 +1,6 @@
 {
   "name": "sinesp-nodejs",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "API para a consulta de placas de veículos na base de dados do SINESP.",
   "main": "index.js",
   "scripts": {
